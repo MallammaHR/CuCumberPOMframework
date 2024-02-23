@@ -9,34 +9,42 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class DriverFactory 
 {
 	public WebDriver driver;
-	
-	private static ThreadLocal<WebDriver> tlDriver=new ThreadLocal<WebDriver>();
-	
-	public static WebDriver getDriver()
-	{
-		return tlDriver.get();
-	}
-	
-	  public WebDriver init_Driver(String browser) {
-	        System.out.println("Browser value is: " + browser);
+    private static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<>();
 
-	        if (browser.equals("chrome")) {
-	            WebDriverManager.chromedriver().setup();
-	            tlDriver.set(new ChromeDriver());
-	        } else if (browser.equals("firefox")) {
-	            WebDriverManager.firefoxdriver().setup();
-	            tlDriver.set(new FirefoxDriver());
-	        } else {
-	            System.out.println("Please enter a valid browser name."+browser);
-	        }
+    public static WebDriver getDriver() 
+    {
+        return tlDriver.get();
+    }
 
-	        WebDriver driver = getDriver();
-	        if (driver != null) {
-	            driver.manage().deleteAllCookies();
-	            driver.manage().window().maximize();
-	        }
+    public WebDriver init_Driver(String browser)
+    {
+        System.out.println("Browser value is: " + browser);
 
-	        return driver;
-	    }
+        if (browser.equals("chrome")) 
+        {
+            WebDriverManager.chromedriver().setup();
+            tlDriver.set(new ChromeDriver());
+        } 
+        else if (browser.equals("firefox")) 
+        {
+            WebDriverManager.firefoxdriver().setup();
+            tlDriver.set(new FirefoxDriver());
+        } 
+        else 
+        {
+            System.out.println("Please enter a valid browser name: " + browser);
+        }
+
+//        driver.manage().deleteAllCookies();
+//        driver.manage().window().maximize();
+        WebDriver driver = getDriver();
+        if (driver != null) 
+        {
+            driver.manage().deleteAllCookies();
+            driver.manage().window().maximize();
+        }
+
+        return getDriver();
+    }
 
 }
