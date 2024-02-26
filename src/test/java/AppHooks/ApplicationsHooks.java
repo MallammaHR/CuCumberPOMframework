@@ -38,21 +38,21 @@ public class ApplicationsHooks
     @After(order =0)
     public void quiteBrowser()
     {
-    	  if (driver != null) {
-              driver.quit();
-          }
+//    	  if (driver != null) {
+//              driver.quit();
+//          }
     
     }
     
     @After(order = 1)
     public void tearDown(Scenario scenario)
     {
-    	if(scenario.isFailed())
-    	{
-    		String screenshotName=scenario.getName().replaceAll("", "_");
-    		byte[] sourncePath=((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
-    		scenario.attach(sourncePath, "img/png", screenshotName);
-    		
-    	}
+//    	if(scenario.isFailed())
+//    	{
+//    		String screenshotName=scenario.getName().replaceAll("", "_");
+//    		byte[] sourncePath=((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+//    		scenario.attach(sourncePath, "img/png", screenshotName);
+//    		
+//    	}
     }
 }

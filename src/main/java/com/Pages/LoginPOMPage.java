@@ -10,10 +10,10 @@ public class LoginPOMPage
 	//1.By locators(initalization)
 
 	
-	private By emailID=By.name("email");
-	private By password=By.name("pass");
-	private By signinBTN=By.name("login");
-	//private By forgotPassWord=By.xpath("//a[contains(text(), 'Forgot password?')]");
+	private By emailID=By.name("username");
+	private By password=By.name("pwd");
+	private By signinBTN=By.xpath("//div[.='Login ']");
+	private By forgotPasswordLink=By.xpath("//a[.='Forgot your password?']");
 	//private By forgotPasswordLink=By.linkText("Forgot password?");
 	
 	//2.Constructor
@@ -28,10 +28,10 @@ public class LoginPOMPage
 		return driver.getTitle();	
 	}
 	
-//	public boolean isforgotPssswordExixts()
-//	{
-//		return driver.findElement(forgotPasswordLink).isDisplayed();
-//	}
+	public boolean isforgotPssswordExixts()
+	{
+		return driver.findElement(forgotPasswordLink).isDisplayed();
+	}
 	
 	public void enterUserName(String email)
 	{
@@ -44,6 +44,14 @@ public class LoginPOMPage
 	 
 	 public void clickOnSignBtn()
 	 {
-		 driver.findElement(signinBTN);
+		 driver.findElement(signinBTN).click();	 
+	 }
+	 
+	 public void doLogin(String un, String pwd)
+	 {
+		 System.out.println("Login with : "+un+"  "+pwd+"  ");
+		  driver.findElement(emailID).sendKeys(un);
+		  driver.findElement(password).sendKeys(pwd);
+		  driver.findElement(signinBTN).click();
 	 }
 }
